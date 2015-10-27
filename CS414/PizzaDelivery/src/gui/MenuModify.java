@@ -567,7 +567,7 @@ public class MenuModify extends JFrame {
 						
 						dataStorage.mananger.changeItemName(index, name);
 						dataStorage.mananger.changeItemPrice(index, price);
-						System.out.print(buttons.get(index).getName());
+						//System.out.print(buttons.get(index).getName());
 						
 						frameModify.dispose();
 
