@@ -272,7 +272,17 @@ public class CreateOrder extends JFrame {
 			}else if(source == btnCancel){
 				
 				//orderCreated = false;
-				SplashScreen.employeeLogin.cashier.setVisible(true);
+				if(SplashScreen.employeeLogin.cashier.create !=null)
+				{
+					SplashScreen.employeeLogin.cashier.setVisible(true);
+					SplashScreen.employeeLogin.cashier.create = null;
+				}
+				else
+				{
+					SplashScreen.customer.setVisible(true);
+					SplashScreen.customer = null;
+				}
+				
 				dispose();
 			}else{//some item button pressed
 				

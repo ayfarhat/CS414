@@ -113,6 +113,7 @@ public class PizzaDeliverGUI extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SplashScreen.splash.setVisible(true);
+				//access = false;
 				dispose();
 			}
 		});

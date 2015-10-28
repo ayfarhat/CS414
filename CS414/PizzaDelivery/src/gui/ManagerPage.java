@@ -79,6 +79,7 @@ public class ManagerPage extends JFrame {
 				main.setVisible(true);
 				dispose();*/
 				SplashScreen.employeeLogin.setVisible(true);
+				SplashScreen.employeeLogin.access = false;
 				dispose();
 			}
 		});

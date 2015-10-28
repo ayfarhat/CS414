@@ -97,6 +97,7 @@ public class ChefPage extends JFrame {
 			if(source == btnLogout)
 			{
 				SplashScreen.employeeLogin.setVisible(true);
+				SplashScreen.employeeLogin.access = false;
 				dispose();
 			}
 			

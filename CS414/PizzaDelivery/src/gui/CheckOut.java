@@ -164,8 +164,12 @@ public class CheckOut extends JFrame {
 			{
 				//SplashScreen.employeeLogin.cashier.create.orderCreated = false;
 				dataStorage.currentOrders.remove(order);
-				SplashScreen.employeeLogin.cashier.create.dispose();
-				if(SplashScreen.employeeLogin.cashier.change != null)
+				if(SplashScreen.employeeLogin.cashier.create != null)
+				{
+					SplashScreen.employeeLogin.cashier.create.dispose();
+				}
+				
+				else if(SplashScreen.employeeLogin.cashier.change != null)
 				{
 					
 					SplashScreen.employeeLogin.cashier.change.labelPanel.removeAll();
@@ -174,6 +178,10 @@ public class CheckOut extends JFrame {
 					SplashScreen.employeeLogin.cashier.change.contentPane.updateUI();
 					SplashScreen.employeeLogin.cashier.change.fillPanels();
 				}
+//				else
+//				{
+//					SplashScreen.customer.
+//				}
 
 				dispose();
 			}
@@ -229,7 +237,18 @@ public class CheckOut extends JFrame {
 					{
 						order.os = orderStatus.inProgress;
 						
-						SplashScreen.employeeLogin.cashier.create.dispose();
+						if(SplashScreen.employeeLogin.cashier.create != null)
+						{
+						
+							SplashScreen.employeeLogin.cashier.create = null;
+						}
+						else 
+						{
+							System.out.println("checout customer");
+							SplashScreen.customer.newOrder = null;
+							
+						}
+						
 						dispose();
 					}
 				}
