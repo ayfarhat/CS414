@@ -8,6 +8,8 @@ public class dataStorage {
 	public static ArrayList<Worker> workers = new ArrayList<Worker>();
 	public static ArrayList<Customer> customers = new ArrayList<Customer>();
 	public static Manager mananger = new Manager("Bob", "12345");
+	public static Cashier cashier = new Cashier("Jack", "54321");
+	//public static Customer customer = new Cashier("Jack", "54321");
 	
 	public static Menu testMenu;
 	

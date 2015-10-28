@@ -167,44 +167,7 @@ public class MenuModify extends JFrame {
 		btnAddNewMenu.setBounds(10, 80, 144, 23);
 		btnAddNewMenu.addActionListener(handler);
 		backButton.addActionListener(handler);
-		/*btnAddNewMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addMenuItem = true;
-				//System.out.println(addMenuItem);
-				//newMenu = new NewMenuItem();
 
-				//newMenu.setVisible(true);
-
-				//System.out.println(addMenuItem);
-				///////////////Issue with count of items//////////////////	
-				String n = name.getText();
-				String p = price.getText();
-
-				if(n.isEmpty())
-				{
-					JOptionPane.showMessageDialog(new JFrame(), "Please enter an item name");
-				}
-
-				else if(p.isEmpty())
-				{
-					JOptionPane.showMessageDialog(new JFrame(), "Please enter an item price");
-				}
-
-				else if(p.equals("0"))
-				{
-					JOptionPane.showMessageDialog(new JFrame(), "Please enter an item price");
-				}
-				else
-				{
-					int value = Integer.parseInt(price.getText());
-					dataStorage.mananger.createMenuItem(n, value, (itemCategory) comboBox.getSelectedItem()); 
-				}
-				updatePanels();
-			}
-
-		});*/
-
-		//contentPane.setLayout(new GridLayout(2,1));
 		contentPane.setLayout(new BorderLayout());
 		
 		JLabel lblPizza = new JLabel("Pizza");
@@ -229,35 +192,27 @@ public class MenuModify extends JFrame {
 		southPane = new JPanel();
 		southPane.setLayout(new GridLayout(2,1));
 		
-		//contentPane.add(btnAddNewMenu,BorderLayout.SOUTH);
-		//contentPane.add(backButton,BorderLayout.EAST);
+		
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new GridLayout(1,2));
 		buttons.add(btnAddNewMenu);
 		buttons.add(backButton);
 		contentPane.add(buttons,BorderLayout.SOUTH);
 		lowerPane.setLayout(new GridLayout(1, 5));
-		//lowerPane.setLocation();
-		//add(contentPane);
+		
 		lowerPane.add(pizzaPanel);
 		lowerPane.add(specialsPanel);
 		lowerPane.add(drinksPanel);
 		lowerPane.add(extrasPanel);
 		lowerPane.add(dessertsPanel);
 		add(contentPane, BorderLayout.NORTH);
-		//add(lowerPane,BorderLayout.SOUTH);
+		
 		southPane.add(labelPanel);
 		southPane.add(lowerPane);
 		
 		add(southPane, BorderLayout.SOUTH);
 		
-		//getContentPane().add(lowerPane,BorderLayout.SOUTH);
-
-
-		//contentPane.add(lowerPane,GridLayout());
-		//contentPane.add(pizzaPanel);
-
-
+		
 	}
 	public void setMyTitle(String title){
 
@@ -266,105 +221,7 @@ public class MenuModify extends JFrame {
 		lblMenuTitle.setBounds(185, 11, 129, 38);
 		contentPane.add(lblMenuTitle,BorderLayout.NORTH);
 	}
-/*	public void updatePanels(){
-		//if(newMenu.getSizeofItems() > 0){
-		System.out.println("inside");
-		if (pizzaPanel.getComponentCount() == 0){
-			pizzaPanel.add(new JLabel("Pizza: "));
-		}
-		if (specialsPanel.getComponentCount() == 0){
-			specialsPanel.add(new JLabel("Specials: "));
-		}
-		if (drinksPanel.getComponentCount() == 0){
-			drinksPanel.add(new JLabel("Drinks: "));
-		}
-		if (extrasPanel.getComponentCount() == 0){
-			extrasPanel.add(new JLabel("Extras: "));
-		}
-		if (dessertsPanel.getComponentCount() == 0){
-			dessertsPanel.add(new JLabel("Desserts: "));
-		}
-		int n = dataStorage.menu.items.size();
 
-		for(int i = 0; i < n; i++){
-			itemCategory category = dataStorage.menu.items.get(i).cat;
-			if(category.equals(itemCategory.pizza)){
-				if(!pizza.contains(dataStorage.menu.items.get(i)))
-				{
-					pizza.add(dataStorage.menu.items.get(i));
-					System.out.println("adding" + dataStorage.menu.items.get(i).name);
-				}
-			}
-			else if(category.equals(itemCategory.special)){
-				if(!specials.contains(dataStorage.menu.items.get(i)))
-				{
-					specials.add(dataStorage.menu.items.get(i));
-					System.out.println("adding" + dataStorage.menu.items.get(i).name);
-				}
-			}
-			else if(category.equals(itemCategory.drinks)){
-				if(!drinks.contains(dataStorage.menu.items.get(i)))
-				{
-					drinks.add(dataStorage.menu.items.get(i));
-					System.out.println("adding" + dataStorage.menu.items.get(i).name);
-				}
-			}
-			else if(category.equals(itemCategory.extras)){
-				if(!extras.contains(dataStorage.menu.items.get(i)))
-				{
-					extras.add(dataStorage.menu.items.get(i));
-					System.out.println("adding" + dataStorage.menu.items.get(i).name);
-				}
-			}
-			else if(category.equals(itemCategory.desserts)){
-				if(!desserts.contains(dataStorage.menu.items.get(i)))
-				{
-					desserts.add(dataStorage.menu.items.get(i));
-					System.out.println("adding" + dataStorage.menu.items.get(i).name);
-				}
-			}
-
-			//}
-			//lowerPane.removeAll();
-			if(pizza.size() > pizzaCount){
-				String name = pizza.get(pizza.size() -1).name;
-				JButton b = new JButton(name);
-				pizzaCount++;
-				pizzaPanel.add(b);
-				pizzaPanel.updateUI();
-			}
-			if(specials.size() > specialsCount){
-				String name = specials.get(specials.size() - 1).name;
-				JButton b = new JButton(name);
-				specialsCount++;
-				specialsPanel.add(b);
-				specialsPanel.updateUI();
-			}
-			if(drinks.size() > drinksCount){
-				String name = drinks.get(drinks.size() - 1).name;
-				JButton b = new JButton(name);
-				drinksCount++;
-				drinksPanel.add(b);
-				drinksPanel.updateUI();
-			}
-			if(extras.size() > extrasCount){
-				String name = extras.get(extras.size() - 1).name;
-				JButton b = new JButton(name);
-				extrasCount++;
-				extrasPanel.add(b);
-				extrasPanel.updateUI();
-			}
-			if(desserts.size() > dessertsCount){
-				String name = desserts.get(desserts.size() - 1).name;
-				JButton b = new JButton(name);
-				dessertsCount++;
-				dessertsPanel.add(b);
-				dessertsPanel.updateUI();
-			}
-
-		}
-
-	}*/
 
 	public class MenuHandler implements ActionListener
 	{
@@ -375,13 +232,7 @@ public class MenuModify extends JFrame {
 			if(source ==  btnAddNewMenu)
 			{
 				addMenuItem = true;
-				//System.out.println(addMenuItem);
-				//newMenu = new NewMenuItem();
 
-				//newMenu.setVisible(true);
-
-				//System.out.println(addMenuItem);
-				///////////////Issue with count of items//////////////////	
 				String n = name.getText();
 				String p = price.getText();
 
@@ -405,21 +256,6 @@ public class MenuModify extends JFrame {
 					dataStorage.mananger.createMenuItem(n, value, (itemCategory) comboBox.getSelectedItem()); 
 				}
 
-				/*if (pizzaPanel.getComponentCount() == 0){
-					pizzaPanel.add(new JLabel("Pizza: "));
-				}
-				if (specialsPanel.getComponentCount() == 0){
-					specialsPanel.add(new JLabel("Specials: "));
-				}
-				if (drinksPanel.getComponentCount() == 0){
-					drinksPanel.add(new JLabel("Drinks: "));
-				}
-				if (extrasPanel.getComponentCount() == 0){
-					extrasPanel.add(new JLabel("Extras: "));
-				}
-				if (dessertsPanel.getComponentCount() == 0){
-					dessertsPanel.add(new JLabel("Desserts: "));
-				}*/
 				int m = dataStorage.menu.items.size();
 
 				for(int i = 0; i < m; i++){
@@ -508,7 +344,7 @@ public class MenuModify extends JFrame {
 			}
 			if(source ==  backButton)
 			{
-				PizzaDeliverGUI.manager.setVisible(true);
+				SplashScreen.employeeLogin.manager.setVisible(true);
 				//dispose();
 				//setVisible(false);
 			}
@@ -558,27 +394,15 @@ public class MenuModify extends JFrame {
 						String name = itemName.getText();
 						double price = Double.parseDouble(itemPrice.getText());
 						String cat = itemCat.getText();
-						//int p = buttons.indexOf(pressed);
-						//pressed.setName(name);
-						
-						//pressed.setName("test");
+					
 						pressed.setText(name);
-						//pizzaPanel.remove(pressed);
 						
 						dataStorage.mananger.changeItemName(index, name);
 						dataStorage.mananger.changeItemPrice(index, price);
-						//System.out.print(buttons.get(index).getName());
 						
 						frameModify.dispose();
 
-
-
-
-
 					}});
-
-
-
 			}
 		}
 	}

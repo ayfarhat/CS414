@@ -26,7 +26,7 @@ public class Order {
 	
 	public void removeItem(MenuItem item){
 		totalCost -= item.price;
-		orderContents.add(item);
+		orderContents.remove(item);
 	}
 	
 	// finish order takes payment and send order

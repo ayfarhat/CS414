@@ -26,21 +26,7 @@ public class ManagerPage extends JFrame {
 	private JPanel contentPane;
 	static ManagerPage frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new ManagerPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -92,7 +78,7 @@ public class ManagerPage extends JFrame {
 				/*PizzaDeliverGUI main = new PizzaDeliverGUI();
 				main.setVisible(true);
 				dispose();*/
-				PizzaDeliverGUI.login.setVisible(true);
+				SplashScreen.employeeLogin.setVisible(true);
 				dispose();
 			}
 		});

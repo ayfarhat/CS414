@@ -11,12 +11,15 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JEditorPane;
 
+import functionality.dataStorage;
 import functionality.itemCategory;
 import gui.MenuModify.MenuHandler;
 
@@ -46,38 +49,25 @@ public class CreateOrder extends JFrame {
 	public JPanel extrasPanel;
 	public JPanel labelPanel;
 	private JLabel lblName;
-	private JTextField nameField;
+	public static JTextField nameField;
 	private JLabel lblOrderType;
-	private JTextField addressField;
+	private static JTextField addressField;
 	private JButton btnCheckout;
 	private JLabel lblPhone;
 	private JTextField phoneField;
 	private JButton btnCancel;
 	private MenuHandler handler;
-	private functionality.Order order;
-	
-	private boolean orderCreated = false;
+	public static functionality.Order order;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new CreateOrder();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	public static boolean orderCreated;
+
 
 	/**
 	 * Create the frame.
 	 */
 	public CreateOrder() {
+		orderCreated = false;
 		getContentPane().setLayout(new GridLayout(2,1));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 607, 607);
@@ -189,8 +179,13 @@ public class CreateOrder extends JFrame {
 		contentPane.add(rdbtnDelivery);
 		
 		rdbtnTakeout = new JRadioButton("Takeout");
+		rdbtnTakeout.setSelected(true);
 		rdbtnTakeout.setBounds(130, 91, 100, 23);
 		contentPane.add(rdbtnTakeout);
+		
+		 ButtonGroup group = new ButtonGroup();
+		 group.add(rdbtnDelivery);
+		 group.add(rdbtnTakeout);
 		
 		JLabel lblAddress = new JLabel("Address:");
 		lblAddress.setBounds(10, 121, 100, 14);
@@ -216,18 +211,14 @@ public class CreateOrder extends JFrame {
 		phoneField.setColumns(10);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(handler);
 		btnCancel.setBounds(10, 147, 100, 23);
 		contentPane.add(btnCancel);
 		southPane.add(labelPanel);
 		southPane.add(lowerPane);
 		
 		getContentPane().add(southPane, BorderLayout.SOUTH);
-//		
-//		JLabel label = new JLabel("");
-//		label.setBounds(331, 84, 46, 14);
-//		contentPane.add(label);
-		//contentPane.add(CreateMenu.newMenu.lowerPane);
-		//contentPane.updateUI();
+
 	}
 	
 	public void buildMenu(String menuName){
@@ -269,40 +260,67 @@ public class CreateOrder extends JFrame {
 			if(source ==  btnCheckout)
 			{
 				if(orderCreated){
-					System.out.println("Inside checkout, orderCreated if");
+					
 					CheckOut checkout = new CheckOut(order);
 					setVisible(false);
 					checkout.setVisible(true);
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Please add items to your order");
+				}
 			}else if(source == btnCancel){
-				System.out.println("Inside cancel");
-				orderCreated = false;
-				CashierPage.frame.setVisible(true);
+				
+				//orderCreated = false;
+				SplashScreen.employeeLogin.cashier.setVisible(true);
 				dispose();
 			}else{//some item button pressed
-				System.out.println("Inside item button pressed");
-				if(nameField.getText() != ""){
-					if(orderCreated == false){
+				
+				if(!nameField.getText().isEmpty())
+				{
+					
+					if(orderCreated == false)
+					{
 						JButton pressed = (JButton)source;
 						functionality.MenuItem item = findMenuItemByName(pressed.getText());
-						if(rdbtnDelivery.isSelected()){
-							if(addressField.getText() != ""){
-								order = new functionality.Order(item, "Delivery", "Bob");
+						if(rdbtnDelivery.isSelected())
+						{
+							
+							
+							if(!addressField.getText().isEmpty())
+							{
+								dataStorage.cashier.createOrder(item, "Takeout", nameField.getText());
+								order = dataStorage.currentOrders.get(dataStorage.currentOrders.size()-1);
+								//order = new functionality.Order(item, "Delivery", nameField.getText());
 								orderCreated = true;
-							}else{
-								//TODO send message for null address
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(new JFrame(), "Please enter a delivery address");
 							}
 							
-						}else if(rdbtnTakeout.isSelected()){
-							System.out.println("Item: last if, order created");
-							order = new functionality.Order(item, "Takeout", "Bob");
+						}
+						else if(rdbtnTakeout.isSelected())
+						{
+							
+							dataStorage.cashier.createOrder(item, "Takeout", nameField.getText());
+							order = dataStorage.currentOrders.get(dataStorage.currentOrders.size()-1);
+							//order = new functionality.Order(item, "Takeout", nameField.getText());
+							
 							orderCreated = true;
 						}
-					}else{//order already exists, add to order
+					}
+					else
+					{//order already exists, add to order
+						
 						JButton pressed = (JButton)source;
 						functionality.MenuItem item = findMenuItemByName(pressed.getText());
 						order.addItem(item);
 					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Please a name to start your order");
 				}
 			}
 		}
