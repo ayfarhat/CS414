@@ -1,5 +1,7 @@
 package gui;
 
+import gui.CashierPage.MenuHandler;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -7,8 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,6 +21,9 @@ import java.awt.event.ActionEvent;
 public class ChefPage extends JFrame {
 
 	private JPanel contentPane;
+	JButton btnViewOrder;
+	JButton btnLogout;
+	JButton btnCompleteOrder;
 
 	/**
 	 * Launch the application.
@@ -49,21 +57,50 @@ public class ChefPage extends JFrame {
 		lblChef.setBounds(183, 11, 44, 22);
 		contentPane.add(lblChef);
 		
-		JButton btnViewOrder = new JButton("View Order");
+		btnViewOrder = new JButton("View Order");
 		btnViewOrder.setBounds(39, 64, 89, 23);
 		contentPane.add(btnViewOrder);
 		
-		JButton btnCompleteOrder = new JButton("Complete Order");
+		btnCompleteOrder = new JButton("Complete Order");
 		btnCompleteOrder.setBounds(249, 64, 117, 23);
 		contentPane.add(btnCompleteOrder);
 		
-		JButton btnLogout = new JButton("Logout");
+		btnLogout = new JButton("Logout");
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btnLogout.setBounds(10, 325, 89, 23);
 		contentPane.add(btnLogout);
+		MenuHandler handler = new MenuHandler();
+		btnLogout.addActionListener(handler);
+		btnViewOrder.addActionListener(handler);
+		btnCompleteOrder.addActionListener(handler);
+	}
+	
+	public class MenuHandler implements ActionListener
+	{
+		public void actionPerformed (ActionEvent event)
+		{
+			Object source = event.getSource();
+
+			if(source ==  btnViewOrder)
+			{
+				ViewOrder view = new ViewOrder();
+				view.setVisible(true);
+			}
+			if(source ==  btnCompleteOrder)
+			{
+				CompleteOrder complete = new CompleteOrder();
+				complete.setVisible(true);
+			}
+			if(source == btnLogout)
+			{
+				SplashScreen.employeeLogin.setVisible(true);
+				dispose();
+			}
+			
+		}
 	}
 
 }

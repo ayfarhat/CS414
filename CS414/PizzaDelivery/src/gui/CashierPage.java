@@ -26,6 +26,7 @@ public class CashierPage extends JFrame {
 	public static ChangeOrder change;
 	JButton btnCreateOrder;
 	JButton btnChangeOrder;
+	JButton btnLogout;
 
 	/**
 	 * Launch the application.
@@ -70,7 +71,7 @@ public class CashierPage extends JFrame {
 		btnChangeOrder.setBounds(267, 66, 121, 23);
 		contentPane.add(btnChangeOrder);
 		
-		JButton btnLogout = new JButton("Logout");
+		btnLogout = new JButton("Logout");
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -81,6 +82,8 @@ public class CashierPage extends JFrame {
 		MenuHandler handler = new MenuHandler();
 		btnCreateOrder.addActionListener(handler);
 		btnChangeOrder.addActionListener(handler);
+		btnLogout.addActionListener(handler);
+		
 	}
 	
 	public class MenuHandler implements ActionListener
@@ -98,6 +101,11 @@ public class CashierPage extends JFrame {
 			{
 				change = new ChangeOrder();
 				change.setVisible(true);
+			}
+			if(source ==  btnLogout)
+			{
+				SplashScreen.employeeLogin.setVisible(true);
+				dispose();
 			}
 		}
 	}
